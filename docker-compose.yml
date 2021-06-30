@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  apache_server:
+     container_name: focus-tools
+     ports:
+     - '800:80'
+     image: centos-php
+     build: .
