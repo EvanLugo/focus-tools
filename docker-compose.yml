@@ -4,5 +4,7 @@ services:
      container_name: focus-tools
      ports:
      - '800:80'
-     image: centos-php
+     image: ubuntu-php7.1
+     volumes:
+     - ./symfony:/var/www/html
      build: .
