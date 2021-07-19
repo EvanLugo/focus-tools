@@ -2,8 +2,8 @@
     ServerName dev.com
     ServerAlias www.dev.com
 
-    DocumentRoot /var/www/html/web
-    <Directory /var/www/html/web>
+    DocumentRoot /var/www/html/symfony/web
+    <Directory /var/www/html/symfony/web>
         AllowOverride All
         Order Allow,Deny
         Allow from All

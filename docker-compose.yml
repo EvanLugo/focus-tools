@@ -6,5 +6,5 @@ services:
      - '800:80'
      image: ubuntu-php7.1
      volumes:
-     - ./symfony:/var/www/html
+     - ./symfony:/var/www/html/symfony
      build: .
