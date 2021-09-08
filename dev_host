@@ -2,11 +2,15 @@
     ServerName dev.com
     ServerAlias www.dev.com
 
+
     DocumentRoot /var/www/html/symfony/web
+    DirectoryIndex /app_dev.php
     <Directory /var/www/html/symfony/web>
-        AllowOverride All
+        AllowOverride None
         Order Allow,Deny
         Allow from All
+
+        FallbackResource /app_dev.php
     </Directory>
 
     # uncomment the following lines if you install assets as symlinks
@@ -15,6 +19,12 @@
     #     Options FollowSymlinks
     # </Directory>
 
+    # optionally disable the fallback resource for the asset directories
+    # which will allow Apache to return a 404 error when files are
+    # not found instead of passing the request to Symfony
+    <Directory /var/www/project/web/bundles>
+        FallbackResource disabled
+    </Directory>
     ErrorLog /var/log/apache2/project_error.log
     CustomLog /var/log/apache2/project_access.log combined
 </VirtualHost>

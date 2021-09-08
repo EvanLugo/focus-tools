@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   apache_server:
-     container_name: focus-tools
+     container_name: symfony
      ports:
      - '800:80'
      image: ubuntu-php7.1
