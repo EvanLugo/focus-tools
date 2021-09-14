@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Create new POST</h1>
+
+    {{ form_start(postForm) }}
+        {{ form_widget(postForm) }}
+
+        <button class="btn btn-primary">
+            Create !
+        </button>
+    {{ form_end(postForm) }}
+
+{% endblock %}

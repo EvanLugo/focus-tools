@@ -25,6 +25,7 @@ class AppKernel extends Kernel
 
             if ('dev' === $this->getEnvironment()) {
                 $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
+                $bundles[] = new Symfony\Bundle\MakerBundle\MakerBundle();
             }
         }
 
