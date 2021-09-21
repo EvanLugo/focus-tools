@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/symfony/vendor/incenteev/composer-parameter-handler" />
+      <path value="$PROJECT_DIR$/symfony/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/symfony/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/symfony/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-apcu" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/symfony" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/contracts" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/symfony/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/symfony/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/symfony/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/phpunit-bridge" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/symfony/vendor/friendsofphp/proxy-manager-lts" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/symfony/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/symfony/vendor/laminas/laminas-code" />
+      <path value="$PROJECT_DIR$/symfony/vendor/laminas/laminas-zendframework-bridge" />
+      <path value="$PROJECT_DIR$/symfony/vendor/laminas/laminas-eventmanager" />
+      <path value="$PROJECT_DIR$/symfony/vendor/composer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/sensio/framework-extra-bundle" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
+</project>
