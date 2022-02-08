@@ -1,0 +1,26 @@
+{% extends 'master.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block seccion_content %}
+
+    {% if app.request.hasPreviousSession %}
+        {% for flash_message in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashbag.get('success') %}
+            <div class="alert alert-success" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <a href="{{ path('send_email') }}" class="btn btn-success">Send Email</a>
+
+{#    {{ dump(app.session.get('notifications')) }}#}
+{#    {{ dump(app.session.get('user')) }}#}
+
+{% endblock %}

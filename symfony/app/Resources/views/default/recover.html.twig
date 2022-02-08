@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if app.request.hasPreviousSession %}
+        {% for flash_message in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashbag.get('success') %}
+            <div class="alert alert-success" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><img src="{{ asset('glezand.svg') }}" style="margin-top: 10%;"></img></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card" style="margin-bottom: 90%;">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Ingresa el correo del usuario</p>
+                <form action="{{ path('recover') }}" method="post">
+                    <div class="input-group mb-3">
+                        <input type="email" placeholder="Email"
+                               id="email" name="email"
+                               class="form-control"
+                               required
+                        >
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-warning btn-block"> Enviar</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+    </body>
+{% endblock %}
