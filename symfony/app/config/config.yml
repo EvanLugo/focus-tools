@@ -31,6 +31,12 @@ framework:
     php_errors:
         log: true
 
+    http_client:
+        default_options:
+            headers:
+                Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxN2I0ZDUxMC04ZDZhLTAxMzgtMjQwNy0wYzViYjNjMmY0YTciLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTkxODA4NTQ5LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6ImV2YW4tbHVnby10cmVqIn0.XLDP_MFqQ7onDw8jd6cVKrza-cvlL5OI7gzTpMUueYk'
+                Accept: 'application/vnd.api+json'
+
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'

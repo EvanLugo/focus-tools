@@ -3,72 +3,44 @@
 
 namespace AppBundle\Controller;
 
-
+use AppBundle\Entity\Player;
 use AppBundle\Entity\Post;
+use AppBundle\Form\PlayerType;
 use AppBundle\Form\PostFormType;
-use Doctrine\ORM\EntityManagerInterface;
+use AppBundle\Service\GetPlayer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends Controller
 {
     /**
-     * @Route("/", name="post_index")
+     * @Route("/", name="home")
      */
-    public function indexAction(Request $request, EntityManagerInterface $em)
+    public function homeAction()
     {
-        /** @var  $from */
-        $form = $this->createForm(PostFormType::class);
-        $form->handleRequest($request);
+        $player = new Player();
+        $player
+            ->setName('LPG Levi')
+            ->setAccount('123.456.21')
+            ->setPlatform('xbox');
+        $form = $this->createForm(PlayerType::class, $player);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            /** @var Post $post */
-            $post = $form->getData();
-
-            /** @var UploadedFile $path */
-            $path = $form->get('path')->getData();
-            /** @var UploadedFile $image */
-            $image = $form->get('image')->getData();
-
-            $extension = 'jpeg';
-
-            $pathName = sprintf('%s_%s.%s', $path->getFilename(), rand(1, 99999), $extension);
-            $imageName = sprintf('%s_%s.%s', $image->getFilename(), rand(1, 99999), $extension);
-
-            $path->move($this->getParameter('posts_paths'), $pathName);
-            $image->move($this->getParameter('posts_images'), $imageName);
-
-            $post->setPath($pathName);
-            $post->setImage($imageName);
-
-            $em->persist($post);
-            $em->flush();
-
-            return $this->redirectToRoute('post_list');
-        }
-
-        return $this->render(
-            'post/index.html.twig',
-            [
-                'postForm' => $form->createView()
-            ]);
+        return $this->render('home/home.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
-     * @Route("/post/list", name="post_list")
+     * @Route("/player", name="player")
      */
-    public function postListAction(EntityManagerInterface $em)
+    public function playerAction()
     {
-        $posts = $em->getRepository(Post::class)->findAll();
 
-        return $this->render(
-            'post/list.html.twig',
-            [
-                'posts' => $posts
-            ]
-        );
+        $playerData = $this->get(GetPlayer::class)->__invoke();
+        dd($playerData);
+
+        return new Response($playerData);
     }
 }
