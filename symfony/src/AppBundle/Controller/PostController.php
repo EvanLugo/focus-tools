@@ -10,7 +10,6 @@ use AppBundle\Form\PostFormType;
 use AppBundle\Service\GetPlayer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\BrowserKit\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends Controller

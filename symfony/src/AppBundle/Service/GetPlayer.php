@@ -14,14 +14,14 @@ class GetPlayer
         $this->client = $client;
     }
 
-    public function __invoke()
+    public function __invoke(string $players)
     {
         $response = $this->client->request(
             'GET',
             'https://api.pubg.com/shards/xbox/players',
             [
                 'query' => [
-                    'filter[playerNames]' => 'LPG Levi,LPG MataRata'
+                    'filter[playerNames]' => $players
                 ]
             ]
         );
