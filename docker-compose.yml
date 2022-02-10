@@ -21,3 +21,7 @@ services:
       MYSQL_DATABASE: symfony
       MYSQL_USER: dbEvan
       MYSQL_PASSWORD: 123
+    volumes:
+      - database:/var/lib/mysql
+volumes:
+  database:
