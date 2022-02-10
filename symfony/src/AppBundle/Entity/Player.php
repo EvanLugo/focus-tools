@@ -32,6 +32,36 @@ class Player
      */
     private $platform;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $rankedTier;
+
+    /**
+     * @ORM\Column(type="integer", length=255)
+     */
+    private $kda;
+
+    public function getRankedTier(): ?string
+    {
+        return $this->rankedTier;
+    }
+
+    public function setRankedTier(?string $rankedTier): void
+    {
+        $this->rankedTier = $rankedTier;
+    }
+
+    public function getKda(): ?int
+    {
+        return $this->kda;
+    }
+
+    public function setKda(?int $kda): void
+    {
+        $this->kda = $kda;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

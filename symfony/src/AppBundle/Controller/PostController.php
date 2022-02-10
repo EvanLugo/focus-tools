@@ -7,7 +7,7 @@ use AppBundle\Entity\Player;
 use AppBundle\Entity\Post;
 use AppBundle\Form\PlayerType;
 use AppBundle\Form\PostFormType;
-use AppBundle\Service\GetPlayer;
+use AppBundle\Service\GetPlayers;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,7 +37,7 @@ class PostController extends Controller
     public function playerAction()
     {
 
-        $playerData = $this->get(GetPlayer::class)->__invoke();
+        $playerData = $this->get(GetPlayers::class)->__invoke();
         dd($playerData);
 
         return new Response($playerData);

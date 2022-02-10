@@ -34,5 +34,9 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    AppBundle\Service\GetPlayer:
-        public: true
+    AppBundle\Service\PUBG\GetPlayer:
+
+    AppBundle\Service\PUBG\GetSeasons:
+
+    AppBundle\Service\PUBG\GetPlayersStats:
+

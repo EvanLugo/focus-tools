@@ -13,28 +13,21 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                <div class="col-12 col-md-12 col-lg-12 order-2 order-md-1">
                     <div class="row">
                         <div class="col-12 col-sm-12">
                             <div class="card-body box-profile">
 
-                                {% for player in players %}
-                                    <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="https://img.favpng.com/20/22/8/playerunknown-s-battlegrounds-video-games-logo-fortnite-battle-royale-battle-royale-game-png-favpng-vzsGQfFGrhrSTi0pPRq7NFkgb.jpg" alt="Card image cap">
-                                        <div class="card-body">
+                                <div class="card-deck">
+                                    {% for form in forms %}
+                                        <div class="card">
+                                            <img class="card-img-top" src="{{ asset('images/Insignias/' ~ form.vars.value.rankedTier ~ '.png') }}" alt="Card image cap">
+                                            {{ form(form) }}
                                         </div>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">{{ player.getName() }}</li>
-                                            <li class="list-group-item">{{ player.getAccount() }}</li>
-                                            <li class="list-group-item">{{ player.getPlatform() }}</li>
-                                        </ul>
-                                        <div class="card-body">
-                                            <a href="#" class="card-link">Card link</a>
-                                            <a href="#" class="card-link">Another link</a>
-                                        </div>
-                                    </div>
-                                {% endfor %}
+                                    {% endfor %}
 
+                                </div>
+                                <a class="btn btn-default" href="{{ url('browser') }}">Back</a>
                             </div>
                         </div>
                     </div>
@@ -44,4 +37,12 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let form = document.getElementsByTagName('form');
+        console.log(form);
+    </script>
 {% endblock %}

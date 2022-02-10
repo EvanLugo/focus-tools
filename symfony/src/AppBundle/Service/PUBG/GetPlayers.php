@@ -1,11 +1,10 @@
 <?php
 
-namespace AppBundle\Service;
-
+namespace AppBundle\Service\PUBG;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class GetPlayer
+class GetPlayers
 {
     private $client;
 
