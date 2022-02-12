@@ -19,14 +19,36 @@
                             <div class="card-body box-profile">
 
                                 <div class="card-deck">
-                                    {% for form in forms %}
+                                    {% for player in players %}
                                         <div class="card">
-                                            <img class="card-img-top" src="{{ asset('images/Insignias/' ~ form.vars.value.rankedTier ~ '.png') }}" alt="Card image cap">
-                                            {{ form(form) }}
+                                            <img class="card-img-top" src="{{ asset('images/Insignias/' ~ player.getRankedTier() ~ '.png') }}" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <b>{{ player.getName() }}</b>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <i class="fab fa-xbox"></i>
+                                                    {{ player.getPlatform() }}
+                                                </li>
+                                                <li class="list-group-item">Ranked KDA: {{ player.getKda() }}</li>
+                                                <li class="list-group-item">
+                                                    <button
+                                                            class="btn btn-primary savePlayer"
+                                                            data-name="{{ player.getName() }}"
+                                                            data-platform="{{ player.getPlatform() }}"
+                                                            data-account="{{ player.getAccount() }}"
+                                                            data-kda="{{ player.getKda() }}"
+                                                            data-ranked="{{ player.getRankedTier() }}"
+                                                    >
+                                                        save
+                                                    </button>
+                                                </li>
+                                            </ul>
                                         </div>
                                     {% endfor %}
 
                                 </div>
+                                <br>
                                 <a class="btn btn-default" href="{{ url('browser') }}">Back</a>
                             </div>
                         </div>
@@ -42,7 +64,38 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        let form = document.getElementsByTagName('form');
-        console.log(form);
+
+        $(document).ready(function () {
+            prepareForms();
+        });
+
+        function prepareForms()
+        {
+            let form = document.getElementsByClassName('savePlayer');
+
+            Array.from(form).forEach(function (value) {
+                value.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    savePlayer(e.target);
+                })
+            })
+        }
+
+        function savePlayer(form)
+        {
+            let data = {
+                name: form.dataset.name,
+                account: form.dataset.account,
+                platform: form.dataset.platform,
+                rankedTier: form.dataset.ranked,
+                kda: form.dataset.kda
+            }
+
+            $.ajax({
+                url: '{{ url('savePlayer') }}',
+                data: data
+            });
+        }
+
     </script>
 {% endblock %}

@@ -40,3 +40,5 @@ services:
 
     AppBundle\Service\PUBG\GetPlayersStats:
 
+    AppBundle\Service\Player\CreatePlayer:
+

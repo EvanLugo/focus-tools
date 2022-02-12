@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PubgConstoller extends AbstractController
+class PubgController extends AbstractController
 {
     /**
      * @Route("/browser", name="browser")
@@ -49,18 +49,15 @@ class PubgConstoller extends AbstractController
                     )
                 );
                 $playerObject->setKda(
-                    (int) $rankedStats['data']['attributes']['rankedGameModeStats']['squad']['kda']
+                    (float) $rankedStats['data']['attributes']['rankedGameModeStats']['squad']['kda']
                 );
 
                 $playerObjects[] = $playerObject;
-                $form = $this->createForm(PlayerType::class, $playerObject);
-                $forms[] = $form->createView();
             }
 
             return $this->render('pubg/playersList.html.twig',
                 [
-                    'players' => $playerObjects,
-                    'forms' => $forms
+                    'players' => $playerObjects
                 ]);
         }
 

@@ -38,7 +38,7 @@ class Player
     private $rankedTier;
 
     /**
-     * @ORM\Column(type="integer", length=255)
+     * @ORM\Column(type="float", length=255)
      */
     private $kda;
 
@@ -52,12 +52,12 @@ class Player
         $this->rankedTier = $rankedTier;
     }
 
-    public function getKda(): ?int
+    public function getKda(): ?float
     {
         return $this->kda;
     }
 
-    public function setKda(?int $kda): void
+    public function setKda(?float $kda): void
     {
         $this->kda = $kda;
     }
