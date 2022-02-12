@@ -1,4 +1,6 @@
 version: '3.8'
+
+
 services:
   apache_server:
     container_name: symfony
@@ -8,6 +10,10 @@ services:
     volumes:
     - ./symfony:/var/www/html/symfony
     build: .
+    links:
+      - mysql:database
+    networks:
+      - app_network
 
   mysql:
     container_name: base_de_datos
@@ -23,5 +29,13 @@ services:
       MYSQL_PASSWORD: 123
     volumes:
       - database:/var/lib/mysql
+    networks:
+      - app_network
+
+
 volumes:
   database:
+
+
+networks:
+  app_network:
