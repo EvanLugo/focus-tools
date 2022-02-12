@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PubgController extends AbstractController
 {
     /**
-     * @Route("/browser", name="browser")
+     * @Route("/team/players", name="form_team_players")
      */
     public function playersBrowserAction(Request $request, GetPlayers $playersService, GetPlayersStats $statsService)
     {
@@ -27,17 +27,20 @@ class PubgController extends AbstractController
             ])
             ->getForm();
 
+        $idTeam = $request->query->get('idTeam' );
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $playersData = $playersService->__invoke($data['players']);
             $playerObjects = [];
-            $forms = [];
+
             foreach ($playersData['data'] as $player) {
                 $playerObject = new Player();
                 $playerObject->setAccount($player['id']);
                 $playerObject->setName($player['attributes']['name']);
                 $playerObject->setPlatform($player['attributes']['shardId']);
+                $playerObject->setTeam($idTeam);
 
                 $rankedStats = $statsService->__invoke($playerObject->getAccount());
 
@@ -55,8 +58,7 @@ class PubgController extends AbstractController
                 $playerObjects[] = $playerObject;
             }
 
-            return $this->render('pubg/playersList.html.twig',
-                [
+            return $this->render('pubg/playersList.html.twig', [
                     'players' => $playerObjects
                 ]);
         }

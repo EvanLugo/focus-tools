@@ -39,6 +39,7 @@
                                                             data-account="{{ player.getAccount() }}"
                                                             data-kda="{{ player.getKda() }}"
                                                             data-ranked="{{ player.getRankedTier() }}"
+                                                            data-team="{{ player.getTeam() }}"
                                                     >
                                                         save
                                                     </button>
@@ -49,7 +50,7 @@
 
                                 </div>
                                 <br>
-                                <a class="btn btn-default" href="{{ url('browser') }}">Back</a>
+                                <a class="btn btn-default" href="{{ url('team_list') }}">Back</a>
                             </div>
                         </div>
                     </div>
@@ -83,18 +84,27 @@
 
         function savePlayer(form)
         {
+            form.classList.add('disabled');
+            form.innerHTML = "saving..."
+
             let data = {
                 name: form.dataset.name,
                 account: form.dataset.account,
                 platform: form.dataset.platform,
                 rankedTier: form.dataset.ranked,
-                kda: form.dataset.kda
+                kda: form.dataset.kda,
+                team: form.dataset.team
             }
 
             $.ajax({
                 url: '{{ url('savePlayer') }}',
-                data: data
-            });
+                data: data,
+                success: function () {
+                    form.classList.remove('btn-default');
+                    form.classList.add('btn-success');
+                    form.innerHTML ='saved successfully';
+                }
+            })
         }
 
     </script>

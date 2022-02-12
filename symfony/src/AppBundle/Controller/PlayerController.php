@@ -22,7 +22,8 @@ class PlayerController extends AbstractController
             $post['name'],
             $post['platform'],
             (float) $post['kda'],
-            $post['rankedTier']
+            $post['rankedTier'],
+            (int) $post['team']
         );
 
         return new JsonResponse($player);

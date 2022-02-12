@@ -42,6 +42,21 @@ class Player
      */
     private $kda;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $idTeam;
+
+    public function getTeam(): int
+    {
+        return $this->idTeam;
+    }
+
+    public function setTeam(int $idTeam): void
+    {
+        $this->idTeam = $idTeam;
+    }
+
     public function getRankedTier(): ?string
     {
         return $this->rankedTier;

@@ -34,7 +34,9 @@ class TeamController extends AbstractController
             $em->persist($team);
             $em->flush();
 
-            return $this->redirectToRoute('team_list');
+            return $this->redirectToRoute('form_team_players', [
+                'idTeam' => $team->getId()
+            ]);
         }
 
         return $this->render(
