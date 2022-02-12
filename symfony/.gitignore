@@ -4,4 +4,4 @@ var/logs/
 var/sessions/
 web/posts/images/
 web/posts/paths/
-web/images/teamLogos/*
+web/images/teamLogos/
