@@ -20,7 +20,8 @@ class CreatePlayer
         string $platform,
         float $kda,
         string $rankedTier,
-        int $team
+        int $team,
+        int $captain
     ): Player {
         $player = new Player();
         $player->setAccount($account);
@@ -29,6 +30,7 @@ class CreatePlayer
         $player->setKda($kda);
         $player->setRankedTier($rankedTier);
         $player->setTeam($team);
+        $player->setCaptain($captain);
 
         $this->em->persist($player);
         $this->em->flush();

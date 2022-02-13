@@ -47,6 +47,21 @@ class Player
      */
     private $idTeam;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $captain;
+
+    public function getCaptain(): int
+    {
+        return $this->captain;
+    }
+
+    public function setCaptain(int $captain): void
+    {
+        $this->captain = $captain;
+    }
+
     public function getTeam(): int
     {
         return $this->idTeam;

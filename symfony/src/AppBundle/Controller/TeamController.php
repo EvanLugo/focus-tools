@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Player;
 use AppBundle\Entity\Team;
 use AppBundle\Form\TeamType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -58,6 +59,25 @@ class TeamController extends AbstractController
             'teams/teamList.html.twig',
             [
                 'teams' => $teams
+            ]
+        );
+    }
+
+    /**
+     * @Route("/team/players/{idTeam}", name="team_players")
+     */
+    public function teamPlayersAction(int $idTeam, EntityManagerInterface $em)
+    {
+        $team = $em->getRepository(Team::class)->find($idTeam);
+        $players  = $em->getRepository(Player::class)->findBy([
+            'idTeam' => $team->getId()
+        ]);
+
+        return $this->render(
+            'teams/teamPlayers.html.twig',
+            [
+                'team' => $team,
+                'players' => $players
             ]
         );
     }

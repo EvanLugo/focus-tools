@@ -31,7 +31,14 @@
                                                     {{ player.getPlatform() }}
                                                 </li>
                                                 <li class="list-group-item">Ranked KDA: {{ player.getKda() }}</li>
-                                                <li class="list-group-item">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input captain" id="captain_{{ player.getName() }}">
+                                                        <label class="form-check-label" for="exampleCheck1">
+                                                            Captain
+                                                            <span class="fa fa-hat-cowboy"></span>
+                                                        </label>
+                                                    </div>
                                                     <button
                                                             class="btn btn-primary savePlayer"
                                                             data-name="{{ player.getName() }}"
@@ -49,6 +56,7 @@
                                     {% endfor %}
 
                                 </div>
+
                                 <br>
                                 <a class="btn btn-default" href="{{ url('team_list') }}">Back</a>
                             </div>
@@ -72,29 +80,41 @@
 
         function prepareForms()
         {
-            let form = document.getElementsByClassName('savePlayer');
+            let forms = document.getElementsByClassName('savePlayer');
+            let checkbox = document.getElementsByClassName('captain');
 
-            Array.from(form).forEach(function (value) {
+            Array.from(forms).forEach(function (value) {
                 value.addEventListener('click', function (e) {
                     e.preventDefault();
                     savePlayer(e.target);
                 })
-            })
+            });
+
+            Array.from(checkbox).forEach(function(element){
+                element.addEventListener('change', function (e) {
+                    if (e.target.checked) {
+                        cleanCaptains();
+                        e.target.checked = true;
+                    }
+                })
+            });
         }
 
         function savePlayer(form)
         {
             form.classList.add('disabled');
-            form.innerHTML = "saving..."
+            form.innerHTML = "saving...";
 
+            let captain = document.getElementById('captain_' + form.dataset.name);
             let data = {
                 name: form.dataset.name,
                 account: form.dataset.account,
                 platform: form.dataset.platform,
                 rankedTier: form.dataset.ranked,
                 kda: form.dataset.kda,
-                team: form.dataset.team
-            }
+                team: form.dataset.team,
+                captain: captain.checked
+            };
 
             $.ajax({
                 url: '{{ url('savePlayer') }}',
@@ -104,6 +124,15 @@
                     form.classList.add('btn-success');
                     form.innerHTML ='saved successfully';
                 }
+            });
+        }
+
+        function cleanCaptains()
+        {
+            let captains = document.getElementsByClassName('captain');
+
+            Array.from(captains).forEach(function(element){
+                element.checked = false;
             })
         }
 

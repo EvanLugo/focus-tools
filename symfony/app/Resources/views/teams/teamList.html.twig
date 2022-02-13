@@ -43,9 +43,10 @@
                                                     <b>Region:</b> {{ team.getRegion() }}
                                                 </li>
                                                 <div class="card-footer">
-                                                    <button class="btn-danger">
+                                                    <a href="{{ path('team_players', {idTeam: team.getId()}) }}" class="btn btn-danger">
                                                         <span class="fa fa-users"></span>
-                                                        See Players</button>
+                                                        See Players
+                                                    </a>
                                                 </div>
                                             </ul>
                                         </div>
