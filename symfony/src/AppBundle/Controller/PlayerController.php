@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlayerController extends AbstractController
 {
     /**
-     * @Route("/savePlayer", name="savePlayer")
+     * @Route("app/savePlayer", name="savePlayer")
      */
     public function savePlayerAction(Request $request, CreatePlayer $playerService)
     {

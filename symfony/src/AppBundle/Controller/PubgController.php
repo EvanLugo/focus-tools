@@ -16,14 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class PubgController extends AbstractController
 {
     /**
-     * @Route("/team/players", name="form_team_players")
+     * @Route("app/team/players", name="form_team_players")
      */
     public function playersBrowserAction(Request $request, GetPlayers $playersService, GetPlayersStats $statsService)
     {
         $form = $this->createFormBuilder()
             ->add('players', TextType::class)
             ->add('search', SubmitType::class, [
-                'label' => 'Search Players'
+                'label' => 'Search Players',
+                'attr' => [
+                    'class' => 'btn btn-dark'
+                ]
             ])
             ->getForm();
 
@@ -71,7 +74,7 @@ class PubgController extends AbstractController
     }
 
     /**
-     * @Route("/seasons", name="season")
+     * @Route("app/seasons", name="season")
      *
      * @param GetSeasons $seasonService
      */

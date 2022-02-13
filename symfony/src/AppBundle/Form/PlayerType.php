@@ -20,7 +20,10 @@ class PlayerType extends AbstractType
             ->add('rankedTier', TextType::class)
             ->add('kda', TextType::class)
             ->add('save', SubmitType::class, [
-                'label' => 'save'
+                'label' => 'save',
+                'attr' => [
+                    'class' => 'btn btn-dark'
+                ]
             ]);
     }
 

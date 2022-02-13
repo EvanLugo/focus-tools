@@ -2,7 +2,7 @@
 
 {% block seccion_content %}
 
-    <div class="card card-danger card-outline">
+    <div class="card card-dark card-outline">
         <div class="card-header">
             <h3 class="card-title">Teams List</h3>
             <div class="card-tools">
@@ -46,7 +46,7 @@
                                         <div class="card-deck">
                                             {% for player in players %}
                                                 <div class="card">
-                                                    <img class="card-img-top" src="{{ asset('images/Insignias/' ~ player.getRankedTier() ~ '.png') }}" alt="Card image cap">
+                                                    <img class="card-img-top bg-dark" src="{{ asset('images/Insignias/' ~ player.getRankedTier() ~ '.png') }}" alt="Card image cap">
                                                     <ul class="list-group list-group-flush">
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                                             <b>{{ player.getName() }}</b>

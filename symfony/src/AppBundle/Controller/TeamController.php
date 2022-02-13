@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TeamController extends AbstractController
 {
     /**
-     * @Route("/teams/form", name="team_form")
+     * @Route("app/teams/form", name="team_form")
      */
     public function teamFormAction(Request $request, EntityManagerInterface $em)
     {
@@ -49,7 +49,7 @@ class TeamController extends AbstractController
     }
 
     /**
-     * @Route("/teams/list", name="team_list")
+     * @Route("app/teams/list", name="team_list")
      */
     public function teamListAction(EntityManagerInterface $em)
     {
@@ -64,7 +64,7 @@ class TeamController extends AbstractController
     }
 
     /**
-     * @Route("/team/players/{idTeam}", name="team_players")
+     * @Route("app/team/players/{idTeam}", name="team_players")
      */
     public function teamPlayersAction(int $idTeam, EntityManagerInterface $em)
     {

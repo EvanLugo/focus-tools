@@ -14,21 +14,23 @@
         {% endfor %}
     {% endif %}
 <body class="hold-transition login-page">
-  <div class="login-box">
-    <div class="login-logo">
-      <a href="#"><img src="{{ asset('glezand.svg') }}" style="margin-top: 10%;"></img></a>
-    </div>
-    <!-- /.login-logo -->
+  <div class="login-box align-content-center">
+
+    <a class="brand-link">
+      <img src="{{ asset('images/PUBG_Logo_Color.png') }}" alt="PUBG Logo" style="width: 320px; height: 200px">
+    </a>
+    <div class="text-center"><h5>CONSOLE SCRIMS</h5></div>
+
     <div class="card" style="margin-bottom: 90%;">
       <div class="card-body login-card-body">
       {% if error %}
         <div class="alert alert-danger alert-dismissible">
-          <li>Credenciales Invalidas</li>
+          <li>Invalid Credentials</li>
         </div>
       {% else %}
-          <p class="login-box-msg">Ingresa usuario y contraseña para iniciar sesión</p>
+          <p class="login-box-msg">Enter username and password to LogIn!</p>
       {% endif %}
-        <form action="{{ path('login_check') }}" method="post">
+        <form action="{{ path('login') }}" method="post">
           <div class="input-group mb-3">
             <input type="email" placeholder="Email"
                    id="username" name="_username" value="{{ last_username }}"
@@ -58,14 +60,19 @@
               </div>
             </div>
             <!-- /.col -->
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+
             <div class="col-4">
-              <button type="submit" class="btn btn-warning btn-block"> Ingresar</button>
+              <button type="submit" class="btn btn-warning btn-block"> Join !</button>
             </div>
             <!-- /.col -->
           </div>
         </form>
         <p class="mb-1">
-          <a href="{{ path('recover_password') }}">Olvide mi contraseña</a>
+{#          <a href="{{ path('recover_password') }}">Olvide mi contraseña</a>#}
         </p>
       </div>
       <!-- /.login-card-body -->

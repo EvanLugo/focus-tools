@@ -37,7 +37,10 @@ class TeamType extends AbstractType
                 ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Save Team'
+                'label' => 'Save Team',
+                'attr' => [
+                    'class' => 'btn btn-dark'
+                ]
             ]);
     }
 

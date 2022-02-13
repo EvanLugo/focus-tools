@@ -2,10 +2,12 @@
 # https://symfony.com/doc/current/security.html
 security:
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: AppBundle\Entity\User
+                property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -14,12 +16,25 @@ security:
             security: false
 
         main:
-            anonymous: ~
-            logout_on_user_change: true
-            # activate different ways to authenticate
+            anonymous: lazy
+            form_login:
+                login_path: login
+                check_path: login
+                csrf_token_generator: security.csrf.token_manager
+                default_target_path: home
+            logout:
+                path: logout
+                target: login
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+    access_control:
+        # require ROLE_ADMIN for /admin*
+        - { path: '^/app', roles: ROLE_ADMIN }
+
+
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: auto

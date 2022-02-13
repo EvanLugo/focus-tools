@@ -2,7 +2,7 @@
 
 {% block seccion_content %}
 
-    <div class="card card-primary card-outline">
+    <div class="card card-dark card-outline">
         <div class="card-header">
             <h3 class="card-title">Team Data</h3>
             <div class="card-tools">
@@ -40,7 +40,7 @@
                                                         </label>
                                                     </div>
                                                     <button
-                                                            class="btn btn-primary savePlayer"
+                                                            class="btn btn-dark savePlayer"
                                                             data-name="{{ player.getName() }}"
                                                             data-platform="{{ player.getPlatform() }}"
                                                             data-account="{{ player.getAccount() }}"
@@ -58,7 +58,7 @@
                                 </div>
 
                                 <br>
-                                <a class="btn btn-default" href="{{ url('team_list') }}">Back</a>
+                                <a class="btn btn-dark" href="{{ url('team_list') }}">Back</a>
                             </div>
                         </div>
                     </div>
@@ -120,8 +120,6 @@
                 url: '{{ url('savePlayer') }}',
                 data: data,
                 success: function () {
-                    form.classList.remove('btn-default');
-                    form.classList.add('btn-success');
                     form.innerHTML ='saved successfully';
                 }
             });

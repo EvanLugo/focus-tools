@@ -2,7 +2,7 @@
 
 {% block seccion_content %}
 
-    <div class="card card-danger card-outline">
+    <div class="card card-dark card-outline">
         <div class="card-header">
             <h3 class="card-title">Teams List</h3>
             <div class="card-tools">
@@ -21,7 +21,7 @@
                                 <div class="card-columns">
                                     {% for team in teams %}
                                         <div class="card">
-                                            <div class="text-center">
+                                            <div class="text-center bg-dark">
                                                 <img
                                                         class="rounded-circle"
                                                         style="width: 200px; height: 200px"
@@ -43,7 +43,7 @@
                                                     <b>Region:</b> {{ team.getRegion() }}
                                                 </li>
                                                 <div class="card-footer">
-                                                    <a href="{{ path('team_players', {idTeam: team.getId()}) }}" class="btn btn-danger">
+                                                    <a href="{{ path('team_players', {idTeam: team.getId()}) }}" class="btn btn-dark">
                                                         <span class="fa fa-users"></span>
                                                         See Players
                                                     </a>
