@@ -29,6 +29,8 @@ RUN touch /etc/apache2/sites-available/dev.com.conf && \
     a2ensite dev.com.conf && \
     a2dissite 000-default.conf && \
     sed -i 's/2M/10M/' /etc/php/7.1/apache2/php.ini && \
+    sed -i 's/128M/700M/' /etc/php/7.1/apache2/php.ini && \
+
     service apache2 restart
 
 CMD apachectl -D FOREGROUND
