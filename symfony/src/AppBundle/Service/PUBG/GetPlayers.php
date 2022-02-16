@@ -32,6 +32,7 @@ class GetPlayers
             );
 
             $xbox = json_decode($responseXbox->getContent(), true);
+            dd($xbox);
             $playersObjects = array_merge($playersObjects, $xbox['data']);
         }
 
