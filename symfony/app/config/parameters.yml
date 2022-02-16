@@ -12,3 +12,4 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     logosDirectory: '%kernel.project_dir%/web/images/teamLogos/'
+    PUBG_API: 'https://api.pubg.com/shards/'

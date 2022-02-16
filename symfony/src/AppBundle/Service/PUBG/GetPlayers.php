@@ -7,26 +7,50 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class GetPlayers
 {
     private $client;
+    private $pubgApi;
 
-    public function __construct(HttpClientInterface $client)
+    public function __construct(HttpClientInterface $client, string $pubgApi)
     {
         $this->client = $client;
+        $this->pubgApi = $pubgApi;
     }
 
-    public function __invoke(string $players)
+    public function __invoke(string $players, bool $xbox, bool $psn)
     {
-        $response = $this->client->request(
-            'GET',
-            'https://api.pubg.com/shards/xbox/players',
-            [
-                'query' => [
-                    'filter[playerNames]' => $players
+        $playersObjects = [];
+
+        if ($xbox) {
+            $pathXbox = sprintf('%s%s',$this->pubgApi,'xbox/players');
+            $responseXbox = $this->client->request(
+                'GET',
+                $pathXbox,
+                [
+                    'query' => [
+                        'filter[playerNames]' => $players
+                    ]
                 ]
-            ]
-        );
+            );
 
-        $content = $response->getContent();
+            $xbox = json_decode($responseXbox->getContent(), true);
+            $playersObjects = array_merge($playersObjects, $xbox['data']);
+        }
 
-        return json_decode($content, true);
+        if ($psn) {
+            $pathPsn = sprintf('%s%s',$this->pubgApi,'psn/players');
+            $responsePsn = $this->client->request(
+                'GET',
+                $pathPsn,
+                [
+                    'query' => [
+                        'filter[playerNames]' => $players
+                    ]
+                ]
+            );
+
+            $psn = json_decode($responsePsn->getContent(), true);
+            $playersObjects = array_merge($playersObjects, $psn['data']);
+        }
+
+        return $playersObjects;
     }
 }

@@ -27,7 +27,11 @@
                                                     <b>{{ player.getName() }}</b>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <i class="fab fa-xbox"></i>
+                                                    {% if player.getPlatform() == 'xbox' %}
+                                                        <i class="fab fa-xbox"></i>
+                                                    {% else %}
+                                                        <i class="fab fa-playstation"></i>
+                                                    {% endif %}
                                                     {{ player.getPlatform() }}
                                                 </li>
                                                 <li class="list-group-item">Ranked KDA: {{ player.getKda() }}</li>

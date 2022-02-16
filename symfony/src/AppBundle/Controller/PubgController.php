@@ -8,6 +8,7 @@ use AppBundle\Service\PUBG\GetPlayers;
 use AppBundle\Service\PUBG\GetPlayersStats;
 use AppBundle\Service\PUBG\GetSeasons;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,16 @@ class PubgController extends AbstractController
     {
         $form = $this->createFormBuilder()
             ->add('players', TextType::class)
+            ->add('xbox', CheckboxType::class, [
+                'required' => false,
+                'label' => false,
+                'label_attr' => ['class' => 'fab fa-xbox']
+            ])
+            ->add('psn', CheckboxType::class, [
+                'required' => false,
+                'label' => false,
+                'label_attr' => ['class' => 'fab fa-playstation']
+            ])
             ->add('search', SubmitType::class, [
                 'label' => 'Search Players',
                 'attr' => [
@@ -35,10 +46,10 @@ class PubgController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $playersData = $playersService->__invoke($data['players']);
+            $playersData = $playersService->__invoke($data['players'], $data['xbox'], $data['psn']);
             $playerObjects = [];
 
-            foreach ($playersData['data'] as $player) {
+            foreach ($playersData as $player) {
                 $playerObject = new Player();
                 $playerObject->setAccount($player['id']);
                 $playerObject->setName($player['attributes']['name']);
