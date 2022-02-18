@@ -35,6 +35,11 @@ class TeamController extends AbstractController
             $em->persist($team);
             $em->flush();
 
+            $this->addFlash(
+                'success',
+                sprintf('Team %s [%s] created successfully !', $team->getName(), $team->getTag())
+            );
+
             return $this->redirectToRoute('form_team_players', [
                 'idTeam' => $team->getId()
             ]);

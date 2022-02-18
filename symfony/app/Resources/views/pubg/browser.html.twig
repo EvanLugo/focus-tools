@@ -3,6 +3,14 @@
 
 {% block seccion_content %}
 
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} flash-">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <div class="card card-dark card-outline">
         <div class="card-header">
             <h3 class="card-title">Players Browser</h3>
@@ -20,8 +28,7 @@
                             <div class="card-body box-profile">
                                 <p>
                                     Make the search of your team members separated by comma, like this:
-                                    <b>LPG Levi,LPG Garp,LPG MataRata</b>
-                                    separated by comma without spaces.
+                                    <b>LPG Levi,LPG Garp,LPG MataRata,LPG_iMaChoO</b> without spaces and chose the respective platforms XBOX, PSN or both of them.
                                 </p>
                                 <br>
                                     {{ form(form) }}

@@ -2,6 +2,14 @@
 
 {% block seccion_content %}
 
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <div class="card card-dark card-outline">
         <div class="card-header">
             <h3 class="card-title">Team Data</h3>
@@ -62,7 +70,7 @@
                                 </div>
 
                                 <br>
-                                <a class="btn btn-dark" href="{{ url('team_list') }}">Back</a>
+                                <a class="btn btn-dark" href="{{ url('form_team_players', {idTeam: idTeam}) }}">Back</a>
                             </div>
                         </div>
                     </div>

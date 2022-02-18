@@ -72,8 +72,23 @@ class PubgController extends AbstractController
                 $playerObjects[] = $playerObject;
             }
 
+            if (count($playerObjects) > 0) {
+                $msg = 'The all players were found !';
+                $type = 'success';
+                if (count($playerObjects) < count(explode(',', $data['players']))) {
+                    $msg = 'The next players were found, seems that some players were not found, make sure to type the names correctly !';
+                    $type = 'warning';
+                }
+
+                $this->addFlash($type, $msg);
+            } else {
+                $this->addFlash('danger', 'Any of these player names were found, make sure to type the names correctly.');
+            }
+
+
             return $this->render('pubg/playersList.html.twig', [
-                    'players' => $playerObjects
+                    'players' => $playerObjects,
+                    'idTeam' => $idTeam
                 ]);
         }
 
