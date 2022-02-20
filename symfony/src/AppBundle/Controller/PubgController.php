@@ -56,7 +56,7 @@ class PubgController extends AbstractController
                 $playerObject->setAccount($player['id']);
                 $playerObject->setName($player['attributes']['name']);
                 $playerObject->setPlatform($player['attributes']['shardId']);
-                $playerObject->setTeam($idTeam);
+                $playerObject->setIdTeam($idTeam);
 
                 $rankedStats = $statsService->__invoke($playerObject->getAccount());
 
