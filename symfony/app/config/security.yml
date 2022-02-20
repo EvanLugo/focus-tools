@@ -32,7 +32,7 @@ security:
 
     access_control:
         # require ROLE_ADMIN for /admin*
-        - { path: '^/app', roles: ROLE_ADMIN }
+        - { path: '^/app', roles: ROLE_USER }
 
 
     encoders:

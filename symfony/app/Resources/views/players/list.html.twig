@@ -1,0 +1,62 @@
+{% extends 'master.html.twig' %}
+
+{% block seccion_content %}
+
+<div class="card card-dark card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Team Data</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12 order-2 order-md-1">
+                <div class="row">
+                    <div class="col-12 col-sm-12">
+                        <div class="card-body box-profile">
+                            <div class="card-deck">
+                                <div class="row">
+                                {% for player in players %}
+                                    <div class="col-md-2">
+                                    <div class="card">
+                                        <img class="card-img-top" src="{{ asset('images/Insignias/' ~ player.getRankedTier() ~ '.png') }}" alt="Card image cap">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <b>{{ player.getName() }}</b>
+                                            </li>
+                                            <li class="list-group-item">
+                                                {% if player.getPlatform() == 'xbox' %}
+                                                    <i class="fab fa-xbox"></i>
+                                                {% else %}
+                                                    <i class="fab fa-playstation"></i>
+                                                {% endif %}
+                                                {{ player.getPlatform() }}
+                                            </li>
+                                            <li class="list-group-item">Ranked KDA: {{ player.getKda() }}</li>
+                                            <div class="card-footer">
+                                                {{ player.getTeam().getName() }}
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    </div>
+                                    <br>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

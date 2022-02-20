@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Player;
 use AppBundle\Service\Player\CreatePlayer;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,5 +30,20 @@ class PlayerController extends AbstractController
         );
 
         return new JsonResponse($player);
+    }
+
+    /**
+     * @Route("app/playersList", name="players_list")
+     */
+    public function playersListAction(EntityManagerInterface $em)
+    {
+        $players =  $em->getRepository(Player::class)->findAll();
+
+        return $this->render(
+            'players/list.html.twig',
+            [
+                'players' => $players
+            ]
+        );
     }
 }

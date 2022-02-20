@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use AppBundle\Repository\PlayerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass=PlayerRepository::class)
@@ -48,9 +50,28 @@ class Player
     private $idTeam;
 
     /**
+     * @var Team|null
+     *
+     * @ManyToOne(targetEntity="Team")
+     * @JoinColumn(name="id_team", referencedColumnName="id")
+     */
+    private $team;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $captain;
+
+
+    public function setTeam(?Team $team): void
+    {
+        $this->team = $team;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
 
     public function getCaptain(): int
     {
@@ -62,12 +83,12 @@ class Player
         $this->captain = $captain;
     }
 
-    public function getTeam(): int
+    public function getIdTeam(): int
     {
         return $this->idTeam;
     }
 
-    public function setTeam(int $idTeam): void
+    public function setIdTeam(int $idTeam): void
     {
         $this->idTeam = $idTeam;
     }

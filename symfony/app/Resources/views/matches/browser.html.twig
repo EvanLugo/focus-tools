@@ -1,0 +1,118 @@
+{% extends 'master.html.twig' %}
+
+{% block seccion_content %}
+
+    <div class="card card-dark card-outline">
+        <div class="card-header">
+            <h3 class="card-title">Matches Browser</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 order-2 order-md-1">
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <div class="card-body box-profile">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form(form) }}
+                                            <p>
+                                            The player would be tha host of the matches you want to find,
+                                            the matches field would be the number of matches you want to find
+                                            </p>
+                                            <br>
+                                            <span class="badge badge-pill badge-dark fas fa-skull">  kills</span>
+                                            <br>
+                                            <span class="badge badge-pill badge-dark fas fa-hand-middle-finger">  assists</span>
+                                            <br>
+                                            <span class="badge badge-pill badge-dark fas fa-crosshairs">  damage</span>
+                                        </div>
+                                        {% if matches is defined %}
+                                            {% for match in matches %}
+
+                                                <div class="col col-md-3">
+                                                    <div class="card">
+                                                      <img src="{{ asset('images/maps/' ~ match.data.attributes.mapName ~ '.png') }}" class="card-img-top">
+
+                                                        <div class="card-header">
+                                                                {{ match.data.attributes.matchType }} - {{ match.data.attributes.gameMode }}
+                                                        </div>
+                                                      <div class="card-body">
+                                                        <div class="overflow-auto" style="height: 200px;">
+                                                            <ul class="list-group list-group-flush">
+                                                            {% for player in match.included|filter(player => player.type == "participant")|sort((a, b) => a.attributes.stats.winPlace <=> b.attributes.stats.winPlace) %}
+                                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    <b>
+                                                                        <small>
+                                                                            #{{ player.attributes.stats.winPlace }}
+                                                                            {{ player.attributes.stats.name }}
+                                                                        </small>
+                                                                    </b>
+                                                                    <span class="badge badge-pill badge-dark fas fa-skull">
+                                                                        {{ player.attributes.stats.kills }}
+                                                                    </span>
+                                                                    <span class="fas fa-hand-middle-finger">
+                                                                        {{ player.attributes.stats.assists }}
+                                                                    </span>
+                                                                    <span class="badge badge-pill badge-dark fas fa-crosshairs">
+                                                                        {{ player.attributes.stats.damageDealt|number_format(2) }}
+                                                                    </span>
+                                                                </li>
+                                                            {% endfor %}
+                                                            </ul>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                 </div>
+
+                                            {% endfor %}
+                                        {% endif %}
+                                    <div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $(document).ready(function () {
+
+            let checkbox = document.getElementsByClassName('platform');
+
+            Array.from(checkbox).forEach(function(element){
+                element.addEventListener('change', function (e) {
+                    if (e.target.checked) {
+                        cleanCheckbox();
+                        e.target.checked = true;
+                    }
+                })
+            });
+
+        });
+
+        function cleanCheckbox()
+        {
+            let checkbox = document.getElementsByClassName('platform');
+
+            Array.from(checkbox).forEach(function(element){
+                element.checked = false;
+            })
+        }
+
+    </script>
+
+{% endblock %}

@@ -4,11 +4,13 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Player;
 use AppBundle\Form\PlayerType;
+use AppBundle\Service\PUBG\GetMatches;
 use AppBundle\Service\PUBG\GetPlayers;
 use AppBundle\Service\PUBG\GetPlayersStats;
 use AppBundle\Service\PUBG\GetSeasons;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -108,5 +110,68 @@ class PubgController extends AbstractController
     {
         $seasons = $seasonService->__invoke();
         dd($seasons);
+    }
+
+    /**
+     * @Route("app/matchesBrowser", name="matches_browser")
+     */
+    public function matchesBrowserAction(Request $request, GetMatches $getMatches)
+    {
+        $form = $this->createFormBuilder()
+            ->add('player', TextType::class)
+            ->add('xbox', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'platform'
+                ],
+                'required' => false,
+                'label' => false,
+                'label_attr' => ['class' => 'fab fa-xbox']
+            ])
+            ->add('psn', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'platform'
+                ],
+                'required' => false,
+                'label' => false,
+                'label_attr' => ['class' => 'fab fa-playstation']
+            ])
+            ->add('matches', ChoiceType::class, [
+                'choices' => [
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                    '6' => 6
+                ]
+            ])
+            ->add('search matches', SubmitType::class, [
+                'label' => 'Search Matches',
+                'attr' => [
+                    'class' => 'btn btn-dark'
+                ]
+            ])
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $matchesData = $getMatches->__invoke($data['player'], $data['xbox'], $data['psn'], $data['matches']);
+
+            return $this->render(
+                'matches/browser.html.twig',
+                [
+                    'form' => $form->createView(),
+                    'matches' => $matchesData
+                ]
+            );
+        }
+
+        return $this->render(
+            'matches/browser.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
     }
 }

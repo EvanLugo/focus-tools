@@ -43,6 +43,8 @@ services:
 
     AppBundle\Service\PUBG\GetPlayersStats:
 
+    AppBundle\Service\PUBG\GetMatches:
+
     AppBundle\Service\Player\CreatePlayer:
 
     AppBundle\Service\Tournament\GetTournaments:

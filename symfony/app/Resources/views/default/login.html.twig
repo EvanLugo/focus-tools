@@ -1,19 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if app.request.hasPreviousSession %}
-        {% for flash_message in app.session.flashbag.get('error') %}
-            <div class="alert alert-danger" role="alert">
-                {{ flash_message }}
-            </div>
-        {% endfor %}
-        {% for flash_message in app.session.flashbag.get('success') %}
-            <div class="alert alert-success" role="alert">
-                {{ flash_message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-<body class="hold-transition login-page">
+  {% for label, messages in app.flashes %}
+    {% for message in messages %}
+      <div class="alert alert-{{ label }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+
+  <body class="hold-transition login-page">
   <div class="login-box align-content-center">
 
     <a class="brand-link">
@@ -72,7 +68,7 @@
           </div>
         </form>
         <p class="mb-1">
-{#          <a href="{{ path('recover_password') }}">Olvide mi contraseña</a>#}
+          <a href="{{ path('register') }}">Register</a>
         </p>
       </div>
       <!-- /.login-card-body -->

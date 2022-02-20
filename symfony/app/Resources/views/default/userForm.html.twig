@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <body class="hold-transition login-page">
+    <div class="login-box align-content-center">
+
+        <a class="brand-link">
+            <img src="{{ asset('images/PUBG_Logo_Color.png') }}" alt="PUBG Logo" style="width: 320px; height: 150px">
+        </a>
+
+        <div class="card" style="margin-bottom: 90%;">
+            <div class="card-body login-card-body">
+                {{ form(form) }}
+            </div>
+        </div>
+
+    </div>
+    </body>
+
+{% endblock %}
