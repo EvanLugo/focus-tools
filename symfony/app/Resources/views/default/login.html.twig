@@ -1,13 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  {% for label, messages in app.flashes %}
-    {% for message in messages %}
-      <div class="alert alert-{{ label }}">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endfor %}
 
   <body class="hold-transition login-page">
   <div class="login-box align-content-center">
@@ -16,6 +9,14 @@
       <img src="{{ asset('images/PUBG_Logo_Color.png') }}" alt="PUBG Logo" style="width: 320px; height: 200px">
     </a>
     <div class="text-center"><h5>CONSOLE SCRIMS</h5></div>
+
+    {% for label, messages in app.flashes %}
+      {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endfor %}
 
     <div class="card" style="margin-bottom: 90%;">
       <div class="card-body login-card-body">

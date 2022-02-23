@@ -12,7 +12,7 @@
             <div class="image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Evan Lugo</a>
+                <a href="#" class="d-block">{{ app.user.name }}</a>
             </div>
         </div>
 
@@ -26,6 +26,8 @@
                         <p>Players</p>
                     </a>
                 </li>
+
+                {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
                     <a class="nav-link">
                         <i class="fas fa-chess-board"></i>
@@ -43,6 +45,8 @@
                         </li>
                     </ul>
                 </li>
+                {% endif %}
+
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -66,42 +70,6 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-warehouse"></i>
-                        <p>
-                            Matches
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Entradas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Salidas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Existencias</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Lista de Productos</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
 
             </ul>
         </nav>
