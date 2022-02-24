@@ -8,10 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AppController extends AbstractController
 {
     /**
-     * @Route("app/", name="home")
+     * @Route("/", name="home")
      */
     public function homeAction()
     {
-        return $this->render('home/home.html.twig');
+        return $this->redirectToRoute('login');
     }
 }
