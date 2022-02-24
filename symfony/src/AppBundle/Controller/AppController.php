@@ -16,7 +16,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("app/", name="home")
+     * @Route("app/home", name="home")
      */
     public function homeAction()
     {
