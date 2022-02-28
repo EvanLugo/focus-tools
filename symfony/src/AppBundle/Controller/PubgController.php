@@ -3,11 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Player;
-use AppBundle\Form\PlayerType;
+use AppBundle\Service\Player\PlayerExist;
 use AppBundle\Service\PUBG\GetMatches;
 use AppBundle\Service\PUBG\GetPlayers;
 use AppBundle\Service\PUBG\GetPlayersStats;
 use AppBundle\Service\PUBG\GetSeasons;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -21,8 +22,12 @@ class PubgController extends AbstractController
     /**
      * @Route("app/team/players", name="form_team_players")
      */
-    public function playersBrowserAction(Request $request, GetPlayers $playersService, GetPlayersStats $statsService)
-    {
+    public function playersBrowserAction(
+        Request $request,
+        GetPlayers $playersService,
+        GetPlayersStats $statsService,
+        PlayerExist $playerExist
+    ) {
         $form = $this->createFormBuilder()
             ->add('players', TextType::class)
             ->add('xbox', CheckboxType::class, [
@@ -48,7 +53,38 @@ class PubgController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $playersData = $playersService->__invoke($data['players'], $data['xbox'], $data['psn']);
+
+            $playersAlreadyCreated = [];
+            $playersNames = explode(',', $data['players']);
+
+            foreach ($playersNames as $i => $playerName) {
+                $playerCreated = $playerExist->__invoke($playerName);
+
+                if ($playerCreated !== null) {
+                    $playersAlreadyCreated[] = $playerCreated;
+                    unset($playersNames[$i]);
+
+                    continue;
+                }
+            }
+
+            $playersData = [];
+            if (count($playersNames) >= 1) {
+                try {
+                    $playersNames = implode(',', $playersNames);
+                    $playersData = $playersService->__invoke($playersNames, $data['xbox'], $data['psn']);
+                } catch (Exception $e) {
+                    $msg = sprintf('There was an error with PUBG API, try it again. code[%s]', $e->getCode());
+                    if ($e->getCode() === 404) {
+                        $msg = sprintf('The players: [%s] were not found', $data['players']);
+                    }
+
+                    $this->addFlash('warning', $msg);
+
+                    return $this->redirectToRoute('form_team_players', ['idTeam' => $idTeam]);
+                }
+            }
+
             $playerObjects = [];
 
             foreach ($playersData as $player) {
@@ -73,6 +109,8 @@ class PubgController extends AbstractController
 
                 $playerObjects[] = $playerObject;
             }
+
+            $playerObjects = array_merge($playerObjects, $playersAlreadyCreated);
 
             if (count($playerObjects) > 0) {
                 $msg = 'The all players were found !';
@@ -173,5 +211,14 @@ class PubgController extends AbstractController
                 'form' => $form->createView()
             ]
         );
+    }
+
+    /**
+     * @Route("/testApi", name="test_api")
+     */
+    public function testApiAction(GetPlayers $getPlayers)
+    {
+        $response = $getPlayers->__invoke('LPG Levi', true, false);
+        dd($response);
     }
 }

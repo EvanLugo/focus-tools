@@ -26,44 +26,46 @@
                         <div class="col-12 col-sm-12">
                             <div class="card-body box-profile">
 
-                                <div class="card-deck">
+                                <div class="row">
                                     {% for player in players %}
-                                        <div class="card">
-                                            <img class="card-img-top" src="{{ asset('images/Insignias/' ~ player.getRankedTier() ~ '.png') }}" alt="Card image cap">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">
-                                                    <b>{{ player.getName() }}</b>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    {% if player.getPlatform() == 'xbox' %}
-                                                        <i class="fab fa-xbox"></i>
-                                                    {% else %}
-                                                        <i class="fab fa-playstation"></i>
-                                                    {% endif %}
-                                                    {{ player.getPlatform() }}
-                                                </li>
-                                                <li class="list-group-item">Ranked KDA: {{ player.getKda() }}</li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input captain" id="captain_{{ player.getName() }}">
-                                                        <label class="form-check-label" for="exampleCheck1">
-                                                            Captain
-                                                            <span class="fa fa-hat-cowboy"></span>
-                                                        </label>
-                                                    </div>
-                                                    <button
-                                                            class="btn btn-dark savePlayer"
-                                                            data-name="{{ player.getName() }}"
-                                                            data-platform="{{ player.getPlatform() }}"
-                                                            data-account="{{ player.getAccount() }}"
-                                                            data-kda="{{ player.getKda() }}"
-                                                            data-ranked="{{ player.getRankedTier() }}"
-                                                            data-team="{{ player.getIdTeam() }}"
-                                                    >
-                                                        save
-                                                    </button>
-                                                </li>
-                                            </ul>
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <img class="card-img-top" src="{{ asset('images/Insignias/' ~ player.getRankedTier() ~ '.png') }}" alt="Card image cap">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <b>{{ player.getName() }}</b>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        {% if player.getPlatform() == 'xbox' %}
+                                                            <i class="fab fa-xbox"></i>
+                                                        {% else %}
+                                                            <i class="fab fa-playstation"></i>
+                                                        {% endif %}
+                                                        {{ player.getPlatform() }}
+                                                    </li>
+                                                    <li class="list-group-item">Ranked KDA: {{ player.getKda()|number_format(2) }}</li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input captain" id="captain_{{ player.getName() }}">
+                                                            <label class="form-check-label" for="exampleCheck1">
+                                                                Captain
+                                                                <span class="fa fa-hat-cowboy"></span>
+                                                            </label>
+                                                        </div>
+                                                        <button
+                                                                class="btn btn-dark savePlayer"
+                                                                data-name="{{ player.getName() }}"
+                                                                data-platform="{{ player.getPlatform() }}"
+                                                                data-account="{{ player.getAccount() }}"
+                                                                data-kda="{{ player.getKda() }}"
+                                                                data-ranked="{{ player.getRankedTier() }}"
+                                                                data-team="{{ player.getIdTeam() }}"
+                                                        >
+                                                            save
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     {% endfor %}
 
@@ -131,7 +133,12 @@
             $.ajax({
                 url: '{{ url('savePlayer') }}',
                 data: data,
-                success: function () {
+                success: function (response) {
+                    if (response.msg) {
+                        form.parentElement.innerHTML = '<span class="small bg-danger">' +response.msg+ '</span>';
+                        return;
+                    }
+
                     form.innerHTML ='saved successfully';
                 }
             });

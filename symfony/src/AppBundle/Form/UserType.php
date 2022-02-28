@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,8 +29,24 @@ class UserType extends AbstractType
             ])
             ->add('name', TextType::class, [
                 'attr' => [
-                    'placeholder' => 'player'
+                    'placeholder' => 'Evan Lugo'
                 ]
+            ])
+            ->add('player', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'LPG Levi'
+                ],
+                'label' => 'Player Tag Name'
+            ])
+            ->add('xbox', CheckboxType::class, [
+                'required' => false,
+                'label' => false,
+                'label_attr' => ['class' => 'fab fa-xbox']
+            ])
+            ->add('psn', CheckboxType::class, [
+                'required' => false,
+                'label' => false,
+                'label_attr' => ['class' => 'fab fa-playstation']
             ])
             ->add('register', SubmitType::class, [
                 'label' => 'register',
@@ -38,12 +55,5 @@ class UserType extends AbstractType
                 ]
             ]);
 
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => User::class
-        ]);
     }
 }

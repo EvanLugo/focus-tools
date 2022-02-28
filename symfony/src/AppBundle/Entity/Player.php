@@ -45,7 +45,7 @@ class Player
     private $kda;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable="true")
      */
     private $idTeam;
 
@@ -53,7 +53,7 @@ class Player
      * @var Team|null
      *
      * @ManyToOne(targetEntity="Team")
-     * @JoinColumn(name="id_team", referencedColumnName="id")
+     * @JoinColumn(name="id_team", referencedColumnName="id", nullable="true")
      */
     private $team;
 

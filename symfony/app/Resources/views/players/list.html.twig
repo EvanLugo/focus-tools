@@ -35,9 +35,11 @@
                                                 {% endif %}
                                                 {{ player.getPlatform() }}
                                             </li>
-                                            <li class="list-group-item">Ranked KDA: {{ player.getKda() }}</li>
+                                            <li class="list-group-item">Ranked KDA: {{ player.getKda()|number_format(2) }}</li>
                                             <div class="card-footer">
+                                                {% if player.getTeam() != null %}
                                                 {{ player.getTeam().getName() }}
+                                                {% endif %}
                                             </div>
                                         </ul>
                                     </div>

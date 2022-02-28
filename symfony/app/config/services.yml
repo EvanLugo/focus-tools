@@ -47,5 +47,9 @@ services:
 
     AppBundle\Service\Player\CreatePlayer:
 
+    AppBundle\Service\Player\PlayerExist:
+
+    AppBundle\Service\User\UserPlayerExist:
+
     AppBundle\Service\Tournament\GetTournaments:
 

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Player;
 use AppBundle\Service\Player\CreatePlayer;
+use AppBundle\Service\Player\PlayerExist;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,9 +16,31 @@ class PlayerController extends AbstractController
     /**
      * @Route("app/savePlayer", name="savePlayer")
      */
-    public function savePlayerAction(Request $request, CreatePlayer $playerService)
-    {
+    public function savePlayerAction(
+        Request $request,
+        CreatePlayer $playerService,
+        PlayerExist $playerExist,
+        EntityManagerInterface $em
+    ) {
         $post = $request->query->all();
+        $player = $playerExist->__invoke($post['name']);
+
+        if ($player !== null) {
+            if ($player->getTeam() !== null) {
+                return new JsonResponse([
+                    'msg' => sprintf(
+                        'Player [%s] is already in team [%s]!',
+                        $player->getName(),
+                        $player->getTeam()->getName()
+                    )
+                ]);
+            }
+
+            $player->setIdTeam((int) $post['team']);
+            $em->flush();
+
+            return new JsonResponse($player);
+        }
 
         $player = $playerService->__invoke(
             $post['account'],

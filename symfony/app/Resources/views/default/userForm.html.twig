@@ -9,6 +9,14 @@
             <img src="{{ asset('images/PUBG_Logo_Color.png') }}" alt="PUBG Logo" style="width: 320px; height: 150px">
         </a>
 
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         <div class="card" style="margin-bottom: 90%;">
             <div class="card-body login-card-body">
                 {{ form(form) }}

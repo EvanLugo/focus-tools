@@ -18,7 +18,7 @@
                         <div class="col-12 col-sm-12">
                             <div class="card-body box-profile">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             {{ form(form) }}
                                             <p>
                                             The player would be tha host of the matches you want to find,
@@ -34,7 +34,7 @@
                                         {% if matches is defined %}
                                             {% for match in matches %}
 
-                                                <div class="col col-md-3">
+                                                <div class="col col-md-4">
                                                     <div class="card">
                                                       <img src="{{ asset('images/maps/' ~ match.data.attributes.mapName ~ '.png') }}" class="card-img-top">
 

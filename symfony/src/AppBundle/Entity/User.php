@@ -5,6 +5,9 @@ namespace AppBundle\Entity;
 use AppBundle\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToOne;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -38,6 +41,25 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @var Player
+     *
+     * @OneToOne(targetEntity="Player")
+     * @JoinColumn(name="id_player", referencedColumnName="id")
+     */
+    private $player;
+
+    public function setPlayer(Player $player): void
+    {
+        $this->player = $player;
+    }
+
+    public function getPlayer(): Player
+    {
+        return $this->player;
+    }
+
 
     public function getId(): ?int
     {
