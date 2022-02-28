@@ -83,7 +83,7 @@ class Player
         $this->captain = $captain;
     }
 
-    public function getIdTeam(): int
+    public function getIdTeam(): ?int
     {
         return $this->idTeam;
     }
