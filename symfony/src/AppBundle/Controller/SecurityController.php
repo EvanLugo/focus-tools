@@ -88,7 +88,7 @@ class SecurityController extends AbstractController
                         $player['attributes']['shardId'],
                         (float) $rankedStats['data']['attributes']['rankedGameModeStats']['squad']['kda'],
                         $rankedTier,
-                        0,
+                        null,
                         0
                     );
                 }

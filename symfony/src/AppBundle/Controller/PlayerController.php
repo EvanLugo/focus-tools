@@ -27,7 +27,7 @@ class PlayerController extends AbstractController
         $player = $playerExist->__invoke($post['name']);
 
         if ($player !== null) {
-            if (!empty($player->getTeam())) {
+            if ($player->getTeam() !== null) {
                 return new JsonResponse([
                     'msg' => sprintf(
                         'Player [%s] is already in team [%s]!',

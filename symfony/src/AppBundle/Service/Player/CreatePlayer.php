@@ -21,10 +21,13 @@ class CreatePlayer
         string $platform,
         float $kda,
         string $rankedTier,
-        int $team,
+        ?int $team,
         int $captain
     ): Player {
-        $team = $this->em->getRepository(Team::class)->find($team);
+
+        if ($team !== null) {
+            $team = $this->em->getRepository(Team::class)->find($team);
+        }
 
         $player = new Player();
         $player->setAccount($account);
