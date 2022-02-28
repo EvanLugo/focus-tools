@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Player;
+use AppBundle\Entity\Team;
 use AppBundle\Service\Player\CreatePlayer;
 use AppBundle\Service\Player\PlayerExist;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,7 +37,9 @@ class PlayerController extends AbstractController
                 ]);
             }
 
-            $player->setIdTeam((int) $post['team']);
+            $team = $em->getRepository(Team::class)->find((int) $post['team']);
+            $player->setTeam($team);
+            $player->setCaptain((bool) $post['captain']);
             $em->flush();
 
             return new JsonResponse($player);
